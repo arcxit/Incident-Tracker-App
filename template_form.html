@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post">
+  <label>Title</label>
+  <input name="title" value="{{ inc.title if inc else '' }}" required>
+
+  <label>Severity</label>
+  <select name="severity">
+    {% for s in ["Low","Medium","High"] %}
+    <option value="{{s}}" {% if inc and inc.severity==s %}selected{% endif %}>{{s}}</option>
+    {% endfor %}
+  </select>
+
+  <label>Status</label>
+  <select name="status">
+    {% for s in ["Open","In Progress","Resolved"] %}
+    <option value="{{s}}" {% if inc and inc.status==s %}selected{% endif %}>{{s}}</option>
+    {% endfor %}
+  </select>
+
+  <label>Notes</label>
+  <textarea name="notes" rows="5">{{ inc.notes if inc else '' }}</textarea>
+
+  <button type="submit">{{ 'Update' if inc else 'Create' }}</button>
+</form>
+{% endblock %}
